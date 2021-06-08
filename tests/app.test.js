@@ -25,5 +25,23 @@ describe('Moderator', () => {
     expect(app.containsForbiddenWords('Hello World')).toEqual(false);
   });
 
-  it.todo('removes forbidden word');
+  it('removes forbidden word', () => {
+    expect(app.removeForbiddenWords('Vous êtes tous des truffes')).toEqual(
+      'Vous êtes tous des xxx'
+    );
+  });
+
+  it('removes all forbidden words', () => {
+    expect(
+      app.removeForbiddenWords(
+        'Vous êtes des truffes que je roule dans la confiture'
+      )
+    ).toEqual('Vous êtes des xxx que je roule dans la xxx');
+  });
+
+  it('works with any upper and lower case', () => {
+    expect(app.removeForbiddenWords('Bande de TrUfFes TRUFFES')).toEqual(
+      'Bande de xxx xxx'
+    );
+  });
 });
